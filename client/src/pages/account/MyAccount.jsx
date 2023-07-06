@@ -75,9 +75,6 @@ const MyAccount = () => {
                                 <Input label="State" type="text" placeholder="Enter State" />
                             </Form.Group>
 
-                            <Form.Group as={Col} lg="6" md="6" sm="12">
-                                <Input label="Zip" type="text" placeholder="Enter Zip code" />
-                            </Form.Group>
                         </Row>
 
 

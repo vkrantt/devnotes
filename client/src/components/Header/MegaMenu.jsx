@@ -36,7 +36,7 @@ const MegaMenu = () => {
             <Container>
                 <Navbar expand='lg' variant="dark" className="mb-3">
                     <Container fluid>
-                        <Navbar.Brand>{screenSize === 'md' || screenSize === 'sm' || screenSize === 'xs' ? name : 'devnotes'}</Navbar.Brand>
+                        <Navbar.Brand as={Link} to="/">{screenSize === 'md' || screenSize === 'sm' || screenSize === 'xs' ? name : 'devnotes'}</Navbar.Brand>
                         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} className="shadow-none border-0 p-0 " />
                         <Navbar.Offcanvas
                             id={`offcanvasNavbar-expand-lg`}

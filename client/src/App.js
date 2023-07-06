@@ -10,6 +10,7 @@ import Signup from "./pages/signup/Signup";
 import ForgotPassword from "./pages/forgotpassword/ForgotPassword";
 import ChangePassword from "./pages/changepassword/ChangePassword";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import DetailPage from "./pages/detailpage/DetailPage";
 
 const App = () => {
   return (
@@ -17,9 +18,16 @@ const App = () => {
       <div style={{ minHeight: "calc(100vh - 88px)" }}>
         <MegaMenu />
         <Routes>
-          <Route path="/" element={<ProtectedRoute children={<Home />}/>} />
-          <Route path="/my-account" element={<ProtectedRoute children={<MyAccount />}/>} />
-          <Route path="/create" element={<ProtectedRoute children={<Create />}/>} />
+          <Route path="/" element={<Home />} />
+          <Route path="detail/:id" element={<DetailPage />} />
+          <Route
+            path="/my-account"
+            element={<ProtectedRoute children={<MyAccount />} />}
+          />
+          <Route
+            path="/create"
+            element={<ProtectedRoute children={<Create />} />}
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />

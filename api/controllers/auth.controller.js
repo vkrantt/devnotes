@@ -22,7 +22,7 @@ async function registerUser(req, res) {
     const savedUser = await newUser.save();
     const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET);
     if (savedUser) {
-      return res.status(200).json({
+      return res.header("auth-token", token).status(200).json({
         status: 200,
         response: "Account created successfully.",
         token: token,
@@ -55,7 +55,7 @@ async function loginUser(req, res) {
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-    return res.status(200).json({
+    return  res.header("auth-token", token).status(200).json({
       status: 200,
       response: "Logged in successfully.",
       token: token,
@@ -91,7 +91,6 @@ async function forgotPassword(req, res) {
 async function changePassword(req, res) {
   const { id } = req.params;
   const { newPassword } = req.body;
-  console.log("=========================", req.params);
   const user = await User.findOne({ _id: id });
   if (!user) {
     return res.json({

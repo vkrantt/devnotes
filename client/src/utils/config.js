@@ -28,3 +28,9 @@ export const storageService = {
     localStorage.clear();
   }
 }
+
+export const formatDate = (d)=> {
+  const options = { month: "long", day: "numeric", year: "numeric" };
+  const date = new Date(d);
+  return date.toLocaleDateString(undefined, options);
+}
