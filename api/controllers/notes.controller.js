@@ -19,7 +19,6 @@ async function getAllNotes(req, res){
 
 async function createNote(req, res){
     const userId = req.user;
-    console.log('00000000000000000000000000', userId)
     const {title, description, socialShare} = req.body;
     try {
         const newNote = new Note({

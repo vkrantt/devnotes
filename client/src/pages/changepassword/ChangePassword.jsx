@@ -51,7 +51,6 @@ const ChangePassword = () => {
             window.location.pathname = "/";
           }, 500);
         }
-        console.log(response);
       })
       .catch(function (error) {
         setLoading(false);

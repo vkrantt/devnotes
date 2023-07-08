@@ -13,7 +13,6 @@ const Home = () => {
   useEffect(() => {
     setIsLoading(true);
     axios.get(`${BASE_URL}`).then((data) => {
-      console.log(data);
       setAllNotes(data.data.response);
       setIsLoading(false);
     });
