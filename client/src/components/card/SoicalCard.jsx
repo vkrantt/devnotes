@@ -12,7 +12,7 @@ const SoicalCard = ({ note }) => {
         <Card.Body className="px-0">
           <blockquote className="blockquote mb-0">
             <p>
-              <NavLink to={`detail/${note._id}`}>{note?.title}</NavLink>
+              <NavLink to={`detail/${note._id}`} className="socialTitle">{note?.title}</NavLink>
             </p>
             <footer className="blockquote-footer text-blue">
               John Doe experts in <cite title="Source Title">Engineering</cite>

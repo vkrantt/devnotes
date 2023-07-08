@@ -1,4 +1,5 @@
-const Note = require("../models/notes.model")
+const User = require("../models/auth.model");
+const Note = require("../models/notes.model");
 
 async function getAllNotes(req, res){
     try {
@@ -18,12 +19,13 @@ async function getAllNotes(req, res){
 
 async function createNote(req, res){
     const userId = req.user;
+    console.log('00000000000000000000000000', userId)
     const {title, description, socialShare} = req.body;
     try {
-       const newNote = new Note({
-        user: userId,
-        title, description, socialShare
-       });
+        const newNote = new Note({
+            userId: userId,
+            title, description, socialShare
+        });
 
        const savedNote = await newNote.save();
        res.status(200).json({
@@ -45,9 +47,25 @@ async function getNoteDetail(req, res){
     const { id } = req.params;
     try {
         const note = await Note.findById(id);
+        const user = await User.findOne({_id : note.userId})        
+        const data = {
+            "_id": note._id,
+            "userId": note.userId,
+            "title": note.title,
+            "description": note.description,
+            "socialShare": note.socialShare,
+            "createdAt": note.createdAt,
+            "updatedAt": note.updatedAt,
+            "createdBy" : {
+                userId : user._id,
+                email : user.email,
+                userImage: user.userImage,
+                username : `${user.firstName} ${user.lastName}`
+            }
+        }
         res.status(200).json({
          status : 'ok',
-         response : note
+         response : data
      })
      } catch (error) {
          res.status(500).json({

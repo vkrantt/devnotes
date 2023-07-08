@@ -12,6 +12,8 @@ import { IoCloseSharp } from "react-icons/io5";
 
 const Signup = () => {
   const [credentials, setCredentials] = useState({
+    firstName: '',
+    lastName : '',
     email: "",
     password: "",
   });
@@ -79,8 +81,9 @@ const Signup = () => {
           toast.error(response.data.response, toastConfig);
         } else {
           toast.success(response.data.response, toastConfig);
-          storageService.set("dev_token", response.data.token);
           setCredentials({
+            firstName: '',
+            lastName: '',
             email: "",
             password: "",
           });
@@ -98,6 +101,38 @@ const Signup = () => {
         <Col lg="5" className="m-auto my-3">
           <h5 className="text-blue">Sign up</h5>
           <Form>
+
+          <Row>
+            <Col lg="6">
+            <Form.Group className="mb-3">
+              <Input
+                type="text"
+                id="firstName"
+                name="firstName"
+                onChange={handleChange}
+                value={credentials.firstName}
+                label="First name"
+                placeholder="First Name"
+              />
+            </Form.Group>
+
+            </Col>
+            <Col lg="6">
+            <Form.Group className="mb-3">
+              <Input
+                type="text"
+                id="lastName"
+                name="lastName"
+                onChange={handleChange}
+                value={credentials.lastName}
+                label="Last Name"
+                placeholder="Last Name"
+              />
+            </Form.Group>
+
+            </Col>
+          </Row>
+
             <Form.Group className="mb-3">
               <Input
                 type="email"

@@ -11,9 +11,12 @@ import Input from "../../components/input/Input";
 import axios from "axios";
 import { BASE_URL } from "../../utils/config";
 import toast, { Toaster } from "react-hot-toast";
-import { toastConfig, storageService } from "../../utils/config";
+import { toastConfig } from "../../utils/config";
+import Loader from "../../components/spinner/Loader";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
+  const navigate = useNavigate();
   const [note, setNote] = useState({
     title: "",
     description: "",
@@ -41,7 +44,7 @@ const Create = () => {
     axios
       .post(`${BASE_URL}/create`, note, {
         headers: {
-          'auth-token': JSON.parse(localStorage.getItem("dev_token"))
+          "auth-token": JSON.parse(localStorage.getItem("dev_token")),
         },
       })
       .then(function (response) {
@@ -51,6 +54,9 @@ const Create = () => {
         } else {
           toast.success(response.data.response, toastConfig);
           setLoading(false);
+          setTimeout(() => {
+            navigate("/");
+          }, 1000);
         }
         setLoading(false);
       })
@@ -84,7 +90,7 @@ const Create = () => {
               <Form.Control
                 as="textarea"
                 placeholder="Leave a comment here"
-                style={{ height: "300px" }}
+                style={{ height: "500px" }}
                 className="border-muted rounded-0 shadow-sm border-2"
                 name="description"
                 onChange={handleChange}
@@ -105,8 +111,9 @@ const Create = () => {
               className="bg-blue rounded-0 px-4 text-light mt-4"
               type="submit"
               onClick={handleSubmit}
+              disabled={!note.title || !note.description}
             >
-              Post
+              {loading ? <Loader /> : "Post"}
             </Button>
           </Form>
         </Col>

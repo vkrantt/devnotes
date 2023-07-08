@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const { BASE_URL } = require("../config/config");
 
 async function registerUser(req, res) {
-  const { email, password } = req.body;
+  const { firstName, lastName, email, password } = req.body;
   try {
     const user = await User.findOne({ email });
     if (user) {
@@ -15,12 +15,21 @@ async function registerUser(req, res) {
     }
     const hash = await bcrypt.hash(password, 10);
     const newUser = await new User({
+      firstName,
+      lastName,
       email,
       password: hash,
     });
 
     const savedUser = await newUser.save();
-    const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET);
+    const payload = {
+      id: savedUser._id,
+      username : `${savedUser.firstName} ${savedUser.lastName}`,
+      email : savedUser.email,
+      userImage: savedUser.userImage,
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET);
     if (savedUser) {
       return res.header("auth-token", token).status(200).json({
         status: 200,
@@ -54,7 +63,14 @@ async function loginUser(req, res) {
       });
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    const payload = {
+      id: user._id,
+      username : `${user.firstName} ${user.lastName}`,
+      email : user.email,
+      userImage: user.userImage,
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET);
     return  res.header("auth-token", token).status(200).json({
       status: 200,
       response: "Logged in successfully.",

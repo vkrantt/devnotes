@@ -24,4 +24,12 @@ code {
 }
 .active{
   color: #fff !important;
+  background: var(--theme)!important;
+  border-bottom: 2px solid #fff !important;
+}
+
+.socialTitle{
+  color: var(--theme) !important;
+  text-decoration: none;
+  font-weight: 600;
 }

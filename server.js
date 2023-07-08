@@ -19,7 +19,7 @@ server.use('/api/auth',require('./api/routes/auth.route'));
 server.get('/', (req, res)=>{
     res.json({
         'status': 'ok',
-        'app' : 'devnotes'
+        'app' : 'devshare'
     })
 })
 

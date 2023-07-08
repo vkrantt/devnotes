@@ -14,7 +14,11 @@ const DetailPage = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${BASE_URL}/detail/${params.id}`)
+      .get(`${BASE_URL}/detail/${params.id}`, {
+        headers: {
+          'Content-Type' : 'application/type'
+        }
+      })
       .then(function (response) {
         setNoteDetail(response.data.response);
         setLoading(false);
@@ -31,17 +35,21 @@ const DetailPage = () => {
         <Loader />
       ) : (
         <Row>
-          <Col lg="10" className="m-auto">
-            <div className="d-flex justify-content-between align-items-end">
-                <div>
-                <h1 className="text-blue">{noteDetail.title}</h1>
-            <p className="text-muted">Created on: <i>{formatDate(noteDetail.createdAt)}</i></p>
-                </div>
-                <SuggestionCard/>
+          <Col lg="8" className="m-auto">
+            <div>
+              <h1 className="text-blue">{noteDetail.title}</h1>
+              <p className="text-muted">
+                Created on: <i>{formatDate(noteDetail.createdAt)}</i>
+              </p>
             </div>
-            <p
-              dangerouslySetInnerHTML={{ __html: noteDetail.description }}
-            ></p>
+
+            <Row className="d-flex align-items-center justify-content-between">
+              <Col lg="5">
+                <SuggestionCard user={noteDetail.createdBy}/>
+              </Col>
+            </Row>
+
+            <p dangerouslySetInnerHTML={{ __html: noteDetail.description }}></p>
           </Col>
         </Row>
       )}

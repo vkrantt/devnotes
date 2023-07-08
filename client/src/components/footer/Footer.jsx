@@ -7,7 +7,7 @@ const Footer = () => {
             <Container className='bg-blue text-light d-flex justify-content-between py-4'>
                 <p>1.0.0</p>
                 <p>
-                    &copy; 2023 <u>devnotes</u>
+                    &copy; 2023 <u>devshare</u>
                 </p>
                 <p>
                     Twitter

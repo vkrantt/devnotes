@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Input from "../../components/input/Input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../../utils/config";
 import toast, { Toaster } from "react-hot-toast";
@@ -11,6 +11,7 @@ import { FcCheckmark } from "react-icons/fc";
 import { IoCloseSharp } from "react-icons/io5";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -82,7 +83,7 @@ const Login = () => {
           storageService.set("dev_token", response.data.token);
           setTimeout(() => {
             window.location.pathname = "/";
-          }, 1000);
+          }, 500);
           setLoading(false);
         }
         setLoading(false);
