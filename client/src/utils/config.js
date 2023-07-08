@@ -1,4 +1,5 @@
-export const BASE_URL= 'http://localhost:3030/api'
+// export const BASE_URL= 'http://localhost:3030/api'
+export const BASE_URL = 'https://denshare.onrender.com/api'
 
 export const toastConfig = {
     duration: 2000,
