@@ -10,8 +10,7 @@ async function authToken(req, res, next) {
         });
     }
     try {
-        const newToken = token.replace("\"", "");
-        const verifiedUser = jwt.verify(newToken, process.env.JWT_SECRET)
+        const verifiedUser = jwt.verify(token, process.env.JWT_SECRET)
         if (!verifiedUser) {
             return res.status(401).json({
                 status: 'fail',

@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { BiUndo, BiRedo, BiCodeAlt , BiImage} from "react-icons/bi";
 import { BsArrowReturnLeft, BsTextParagraph} from "react-icons/bs";
 
 
-function TextEditor({setNote}) {
+function TextEditor({setNote, description}) {
 
+  useEffect(() => {
+   if(description){
+    document.getElementById("editor").innerHTML = description;
+   }
+  }, [description])
+  
   const applyStyle = (style, value = null) => {
     document.execCommand(style, false, value);
    

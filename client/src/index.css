@@ -23,8 +23,6 @@ code {
   color: var(--theme)!important;
 }
 .active{
-  color: #fff !important;
-  background: var(--theme)!important;
   border-bottom: 2px solid #fff !important;
 }
 

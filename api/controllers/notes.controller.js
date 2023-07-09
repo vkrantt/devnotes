@@ -74,4 +74,66 @@ async function getNoteDetail(req, res){
      }
 }
 
-module.exports = {getAllNotes, createNote, getNoteDetail}
+async function getNoteByUser(req, res){
+    const id = req.user;
+    try {
+       const notes = await Note.find({userId : id});
+       res.status(200).json({
+        status : 'ok',
+        response : notes
+    })
+    } catch (error) {
+        res.status(500).json({
+            status : 'error',
+            error : error
+        })
+    }
+}
+
+async function getNoteById(req, res){
+    const { id } = req.params;
+    try {
+       const note = await Note.findById(id);
+       res.status(200).json({
+        status : 'ok',
+        response : note
+    })
+    } catch (error) {
+        res.status(500).json({
+            status : 'error',
+            error : error
+        })
+    }
+}
+
+async function updateNoteById(req, res){
+    const { id } = req.params;
+    try {
+       const note = await Note.findById(id);
+
+       if(note){
+        const payload = {
+            'title' : req.body.title,
+            'description' : req.body.description,
+            'socialShare' : req.body.socialShare,
+            'updatedAt' : new Date()
+           }
+        await Note.findByIdAndUpdate(id, {$set: payload}, {new: true})
+        return res.status(200).json({
+            status : 'ok',
+            response : 'Note updated.'
+        })
+       }
+       res.status(200).json({
+        status : 'fail',
+        response : 'Not found.'
+    })
+    } catch (error) {
+        res.status(500).json({
+            status : 'error',
+            error : error
+        })
+    }
+}
+
+module.exports = {getAllNotes, createNote, getNoteDetail, getNoteByUser, updateNoteById, getNoteById}

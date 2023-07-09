@@ -1,11 +1,20 @@
 import React from "react";
-import { Card } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { Button, Card } from "react-bootstrap";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { formatDate } from "../../utils/config";
+import {BiEdit, BiTrashAlt} from 'react-icons/bi'
 
 const SoicalCard = ({ note }) => {
- 
+  const {pathname} = useLocation();
+  const navigate = useNavigate();
 
+  const handleEdit = (note)=>{
+    navigate({
+      pathname: '/create',
+      search: `?id=${note._id}`,
+    });
+  }
+  
   return (
     <div>
       <Card className="border-0 border-bottom border-blue border-3 rounded-0">
@@ -21,7 +30,14 @@ const SoicalCard = ({ note }) => {
               Last updated on {formatDate(note.createdAt)}
             </h6>
           </blockquote>
+          
         </Card.Body>
+        {pathname === '/my-wall' && (
+          <div className="d-flex align-items-center mb-2">
+          <Button variant='none' className="btn p-0 border-0 shadow-none me-2" onClick={()=>handleEdit(note)}><BiEdit/></Button>
+          <Button variant='none' className="btn p-0 border-0 shadow-none me-2"><BiTrashAlt/></Button>
+          </div>
+        )}
       </Card>
     </div>
   );

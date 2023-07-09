@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { BASE_URL, formatDate } from "../../utils/config";
 import Loader from "../../components/spinner/Loader";
 import SuggestionCard from "../../components/suggestionCard/SuggestionCard";
@@ -25,7 +25,6 @@ const DetailPage = () => {
       })
       .catch(function (error) {
         setLoading(false);
-        console.log(error);
       });
   }, [params.id]);
 
