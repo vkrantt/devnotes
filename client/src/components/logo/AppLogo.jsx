@@ -6,7 +6,7 @@ const AppLogo = ({ user }) => {
       {user ? (
         <div>
           <div style={{ fontSize: "18px" }}>devshare</div>
-          <div style={{ fontSize: "10px" }}>Vikrant Kumar</div>
+          <div style={{ fontSize: "10px" }}>{user?.username}</div>
         </div>
       ) : (
         <div>
