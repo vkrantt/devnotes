@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Form, Nav, NavDropdown, Navbar, Button, Offcanvas } from 'react-bootstrap';
 import './MegaMenu.css';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { storageService } from '../../utils/config';
 import { getUserDetail } from '../../service/user';
 
 const MegaMenu = () => {
     const [user] = useState(getUserDetail());
-
+    const navigate = useNavigate();
     const [name] = useState(user?.username);
     const [screenSize, setScreenSize] = useState('xl');
     const token = localStorage.getItem('dev_token');
@@ -18,7 +18,7 @@ const MegaMenu = () => {
     const handleLogout = ()=>{
         setShow(false);
         storageService.remove('dev_token');
-        window.location.pathname = "/login";
+       navigate('/')
     }
 
     useEffect(() => {
