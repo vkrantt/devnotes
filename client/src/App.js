@@ -32,14 +32,14 @@ const App = () => {
           <Route
             path="/my-wall"
             element={
-              <ProtectForAdmin children={<MyWall />} isAdmin={user.isAdmin} />
+              <ProtectForAdmin children={<MyWall />} isAdmin={user?.isAdmin} />
             }
           />
           <Route path="/my-wall/detail/:id" element={<DetailPage />} />
           <Route
             path="/create"
             element={
-              <ProtectForAdmin children={<Create />} isAdmin={user.isAdmin} />
+              <ProtectForAdmin children={<Create />} isAdmin={user?.isAdmin} />
             }
           />
           <Route path="/login" element={<Login />} />

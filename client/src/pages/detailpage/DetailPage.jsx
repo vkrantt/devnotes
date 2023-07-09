@@ -43,7 +43,7 @@ const DetailPage = () => {
             </div>
 
             <Row className="d-flex align-items-center justify-content-between">
-              <Col lg="5">
+              <Col lg="6">
                 <SuggestionCard user={noteDetail.createdBy}/>
               </Col>
             </Row>
