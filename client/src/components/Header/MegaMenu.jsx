@@ -59,7 +59,7 @@ const MegaMenu = () => {
                             <Offcanvas.Body>
                                 {token ? <Nav className="justify-content-end flex-grow-1 pe-3">
                                     <Nav.Link className={`${pathname === '/' ? 'active' : ''}`} onClick={()=> setShow(false)} as={Link} to="/">Home</Nav.Link>
-                                    <Nav.Link className={`${pathname === '/create' ? 'active' : ''}`} onClick={()=> setShow(false)} as={Link} to="/create">Create</Nav.Link>
+                                    {user.isAdmin && (<Nav.Link  className={`${pathname === '/create' ? 'active' : ''}`} onClick={()=> setShow(false)} as={Link} to="/create">Create</Nav.Link>)}
                                     <NavDropdown
                                         title={name}
                                         id={`offcanvasNavbarDropdown-expand-lg`}

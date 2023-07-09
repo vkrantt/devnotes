@@ -18,7 +18,7 @@ const SoicalCard = ({ note }) => {
               John Doe experts in <cite title="Source Title">Engineering</cite>
             </footer>
             <h6 className="text-muted">
-              Last updated on {formatDate(note.createdOn)}
+              Last updated on {formatDate(note.createdAt)}
             </h6>
           </blockquote>
         </Card.Body>

@@ -27,6 +27,7 @@ async function registerUser(req, res) {
       username : `${savedUser.firstName} ${savedUser.lastName}`,
       email : savedUser.email,
       userImage: savedUser.userImage,
+      isAdmin : savedUser.isAdmin
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET);
@@ -68,8 +69,8 @@ async function loginUser(req, res) {
       username : `${user.firstName} ${user.lastName}`,
       email : user.email,
       userImage: user.userImage,
+      isAdmin : user.isAdmin
     };
-
     const token = jwt.sign(payload, process.env.JWT_SECRET);
     return  res.header("auth-token", token).status(200).json({
       status: 200,
