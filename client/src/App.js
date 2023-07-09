@@ -16,7 +16,7 @@ import { getUserDetail } from "./service/user";
 import ProtectForAdmin from "./routes/ProtectForAdmin";
 
 const App = () => {
-    const [user] = useState(getUserDetail());
+  const [user] = useState(getUserDetail());
 
   return (
     <BrowserRouter>

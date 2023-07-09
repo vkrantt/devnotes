@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Form,
@@ -12,12 +12,13 @@ import "./MegaMenu.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { storageService } from "../../utils/config";
 import { getUserDetail } from "../../service/user";
+import AppLogo from "../logo/AppLogo";
+import Avatar from "../avatar/Avatar";
 
 const MegaMenu = () => {
-  const [user] = useState(getUserDetail());
+  const [user, setUser] = useState(getUserDetail());
   const navigate = useNavigate();
-  const [name] = useState(user?.username);
-  // const [screenSize, setScreenSize] = useState('xl');
+  // const [screenSize, setScreenSize] = useState("xl");
   const token = localStorage.getItem("dev_token");
   const { pathname } = useLocation();
 
@@ -26,33 +27,38 @@ const MegaMenu = () => {
   const handleLogout = () => {
     setShow(false);
     storageService.remove("dev_token");
+    setUser(false);
     navigate("/");
   };
 
   // useEffect(() => {
   //   setScreenSize(getViewport());
-  //   console.log(screenSize)
   // }, [screenSize]);
 
   // const getViewport = () => {
-  //     const width = Math.max(
-  //       document.documentElement.clientWidth,
-  //       window.innerWidth || 0
-  //     );
-  //     if (width <= 576) return 'xs';
-  //     if (width <= 768) return 'sm';
-  //     if (width <= 992) return 'md';
-  //     if (width <= 1200) return 'lg';
-  //     return 'xl';
-  //   }
+  //   const width = Math.max(
+  //     document.documentElement.clientWidth,
+  //     window.innerWidth || 0
+  //   );
+  //   if (width <= 576) return "xs";
+  //   if (width <= 768) return "sm";
+  //   if (width <= 992) return "md";
+  //   if (width <= 1200) return "lg";
+  //   return "xl";
+  // };
 
   return (
     <Container fluid className="bg-blue sticky-top">
       <Container>
-        <Navbar expand="lg" variant="dark" className="mb-3">
+        <Navbar
+          expand="lg"
+          variant="dark"
+          className="mb-3"
+          style={{ height: "70px" }}
+        >
           <Container fluid>
             <Navbar.Brand as={Link} to="/">
-              devshare
+              <AppLogo user={user} />
             </Navbar.Brand>
             <Navbar.Toggle
               onClick={() => setShow(!show)}
@@ -83,7 +89,7 @@ const MegaMenu = () => {
                       Home
                     </Nav.Link>
                     <NavDropdown
-                      title={name}
+                      title={<Avatar userImage={user?.userImage} />}
                       id={`offcanvasNavbarDropdown-expand-lg`}
                       className="shadow-none"
                     >
