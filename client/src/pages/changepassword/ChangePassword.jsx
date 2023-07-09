@@ -13,39 +13,36 @@ const ChangePassword = () => {
   const userId = searchParams.get("id");
   const [loading, setLoading] = useState(false);
   const [credentials, setCredentials] = useState({
-    newPassword : '',
-    confirmPassword : ''
-  })
-  const [validationError, setValidationError] = useState(false)
+    newPassword: "",
+    confirmPassword: "",
+  });
+  const [validationError, setValidationError] = useState(false);
 
-  const handleChange = (e)=>{
+  const handleChange = (e) => {
     setCredentials({
       ...credentials,
-      [e.target.name] : e.target.value
-    })
-
-   
-  }
-
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true)
-    if(credentials.newPassword !== credentials.confirmPassword){
-      setLoading(false)
-      return setValidationError(true)
-    }else{
-      setLoading(false)
-      setValidationError(false)
+    setLoading(true);
+    if (credentials.newPassword !== credentials.confirmPassword) {
+      setLoading(false);
+      return setValidationError(true);
+    } else {
+      setLoading(false);
+      setValidationError(false);
     }
-
-    
     axios
-      .post(`${BASE_URL}/auth/changepassword/${userId}`, {newPassword : credentials.confirmPassword})
+      .post(`${BASE_URL}/auth/changepassword/${userId}`, {
+        newPassword: credentials.confirmPassword,
+      })
       .then(function (response) {
         if (response.data.status === 400) {
           toast.error(response.data.response, toastConfig);
-        }else{
+        } else {
           toast.success(response.data.response, toastConfig);
           setTimeout(() => {
             window.location.pathname = "/";
@@ -91,16 +88,18 @@ const ChangePassword = () => {
               className="bg-blue rounded-0 px-4 text-light"
               type="submit"
               onClick={handleSubmit}
-              disabled={ !credentials.newPassword || !credentials.confirmPassword}
+              disabled={
+                !credentials.newPassword || !credentials.confirmPassword
+              }
             >
-              {loading ? <Loader/> : 'Reset password'} 
+              {loading ? <Loader /> : "Reset password"}
             </Button>
-
           </Form>
           {validationError ? (
             <p className="text-danger">Passwords not matching.</p>
-          ) : ''}
-
+          ) : (
+            ""
+          )}
         </Col>
       </Row>
       <Toaster position="top-center" reverseOrder={false} />
