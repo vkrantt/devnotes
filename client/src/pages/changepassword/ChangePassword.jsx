@@ -52,7 +52,6 @@ const ChangePassword = () => {
       .catch(function (error) {
         setLoading(false);
         toast.error(error.error.message, toastConfig);
-        console.log(error);
       });
   };
   return (

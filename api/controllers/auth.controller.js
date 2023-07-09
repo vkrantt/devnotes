@@ -24,10 +24,10 @@ async function registerUser(req, res) {
     const savedUser = await newUser.save();
     const payload = {
       id: savedUser._id,
-      username : `${savedUser.firstName} ${savedUser.lastName}`,
-      email : savedUser.email,
+      username: `${savedUser.firstName} ${savedUser.lastName}`,
+      email: savedUser.email,
       userImage: savedUser.userImage,
-      isAdmin : savedUser.isAdmin
+      isAdmin: savedUser.isAdmin,
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET);
@@ -49,7 +49,11 @@ async function registerUser(req, res) {
 async function loginUser(req, res) {
   const { email, password } = req.body;
   try {
-    const user = await User.findOne({ email });
+    const query = {
+      email: email,
+      isDeleted: false,
+    };
+    const user = await User.findOne(query);
     if (!user) {
       return res.json({
         status: 400,
@@ -66,13 +70,13 @@ async function loginUser(req, res) {
 
     const payload = {
       id: user._id,
-      username : `${user.firstName} ${user.lastName}`,
-      email : user.email,
+      username: `${user.firstName} ${user.lastName}`,
+      email: user.email,
       userImage: user.userImage,
-      isAdmin : user.isAdmin
+      isAdmin: user.isAdmin,
     };
     const token = jwt.sign(payload, process.env.JWT_SECRET);
-    return  res.header("auth-token", token).status(200).json({
+    return res.header("auth-token", token).status(200).json({
       status: 200,
       response: "Logged in successfully.",
       token: token,
@@ -122,8 +126,90 @@ async function changePassword(req, res) {
 
   res.status(200).json({
     status: "ok",
-    resposne: "Password updated successfully.",
+    response: "Password updated successfully.",
   });
 }
 
-module.exports = { registerUser, loginUser, forgotPassword, changePassword };
+// Get user by id
+async function getUserById(req, res) {
+  const { id } = req.params;
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      return res.json({
+        status: 400,
+        response: "User Not found.",
+      });
+    }
+
+    res.status(200).json({
+      status: "ok",
+      response: user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      error: error,
+    });
+  }
+}
+
+// Update user
+async function updateUserById(req, res) {
+  const { id } = req.params;
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      return res.json({
+        status: 400,
+        response: "User Not found.",
+      });
+    }
+
+    await User.findByIdAndUpdate(id, { $set: req.body });
+    res.status(200).json({
+      status: "ok",
+      response: "Profile updated.",
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      error: error,
+    });
+  }
+}
+
+// Delete user
+async function deleteUserById(req, res) {
+  const { id } = req.params;
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      return res.json({
+        status: 400,
+        response: "User Not found.",
+      });
+    }
+
+    await User.findByIdAndUpdate(id, { $set: { isDeleted: true } });
+    res.status(200).json({
+      status: "ok",
+      response: "Account deleted ! Hoping that we'll see you again.",
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      error: error,
+    });
+  }
+}
+
+module.exports = {
+  registerUser,
+  loginUser,
+  forgotPassword,
+  changePassword,
+  getUserById,
+  updateUserById,
+  deleteUserById,
+};

@@ -12,8 +12,8 @@ import { IoCloseSharp } from "react-icons/io5";
 
 const Signup = () => {
   const [credentials, setCredentials] = useState({
-    firstName: '',
-    lastName : '',
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
@@ -68,7 +68,6 @@ const Signup = () => {
         setLengthCheck(false);
       }
     }
-
   };
 
   const handleSubmit = (e) => {
@@ -82,8 +81,8 @@ const Signup = () => {
         } else {
           toast.success(response.data.response, toastConfig);
           setCredentials({
-            firstName: '',
-            lastName: '',
+            firstName: "",
+            lastName: "",
             email: "",
             password: "",
           });
@@ -92,7 +91,6 @@ const Signup = () => {
       })
       .catch(function (error) {
         setLoading(false);
-        console.log(error);
       });
   };
   return (
@@ -101,37 +99,34 @@ const Signup = () => {
         <Col lg="5" className="m-auto my-3">
           <h5 className="text-blue">Sign up</h5>
           <Form>
-
-          <Row>
-            <Col lg="6">
-            <Form.Group className="mb-3">
-              <Input
-                type="text"
-                id="firstName"
-                name="firstName"
-                onChange={handleChange}
-                value={credentials.firstName}
-                label="First name"
-                placeholder="First Name"
-              />
-            </Form.Group>
-
-            </Col>
-            <Col lg="6">
-            <Form.Group className="mb-3">
-              <Input
-                type="text"
-                id="lastName"
-                name="lastName"
-                onChange={handleChange}
-                value={credentials.lastName}
-                label="Last Name"
-                placeholder="Last Name"
-              />
-            </Form.Group>
-
-            </Col>
-          </Row>
+            <Row>
+              <Col lg="6">
+                <Form.Group className="mb-3">
+                  <Input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    onChange={handleChange}
+                    value={credentials.firstName}
+                    label="First name"
+                    placeholder="First Name"
+                  />
+                </Form.Group>
+              </Col>
+              <Col lg="6">
+                <Form.Group className="mb-3">
+                  <Input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    onChange={handleChange}
+                    value={credentials.lastName}
+                    label="Last Name"
+                    placeholder="Last Name"
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
 
             <Form.Group className="mb-3">
               <Input
@@ -206,7 +201,7 @@ const Signup = () => {
           </p>
         </Col>
       </Row>
-      
+
       <Toaster position="top-center" reverseOrder={false} />
     </Container>
   );
