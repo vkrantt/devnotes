@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Nav,
@@ -12,7 +12,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { storageService } from "../../utils/config";
 import { getUserDetail } from "../../service/user";
 import AppLogo from "../logo/AppLogo";
-import Avatar from "../avatar/Avatar";
 import Search from "../search/Search";
 
 const MegaMenu = () => {
@@ -21,7 +20,7 @@ const MegaMenu = () => {
   // const [screenSize, setScreenSize] = useState("xl");
   const token = localStorage.getItem("dev_token");
   const { pathname } = useLocation();
-
+  const [screenSize, setScreenSize] = useState(null);
   const [show, setShow] = useState(false);
 
   const handleLogout = () => {
@@ -31,21 +30,21 @@ const MegaMenu = () => {
     navigate("/");
   };
 
-  // useEffect(() => {
-  //   setScreenSize(getViewport());
-  // }, [screenSize]);
+  useEffect(() => {
+    setScreenSize(getViewport());
+  }, [screenSize]);
 
-  // const getViewport = () => {
-  //   const width = Math.max(
-  //     document.documentElement.clientWidth,
-  //     window.innerWidth || 0
-  //   );
-  //   if (width <= 576) return "xs";
-  //   if (width <= 768) return "sm";
-  //   if (width <= 992) return "md";
-  //   if (width <= 1200) return "lg";
-  //   return "xl";
-  // };
+  const getViewport = () => {
+    const width = Math.max(
+      document.documentElement.clientWidth,
+      window.innerWidth || 0
+    );
+    if (width <= 576) return "xs";
+    if (width <= 768) return "sm";
+    if (width <= 992) return "md";
+    if (width <= 1200) return "lg";
+    return "xl";
+  };
 
   return (
     <Container fluid className="bg-blue sticky-top mb-3">
@@ -65,6 +64,7 @@ const MegaMenu = () => {
             id={`offcanvasNavbar-expand-lg`}
             aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
             placement="end"
+            className="bg-light w-75"
           >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
@@ -82,10 +82,25 @@ const MegaMenu = () => {
                   >
                     Home
                   </Nav.Link>
+
+                  {user.isAdmin && (
+                    <Nav.Link
+                      className={`${pathname === "/my-wall" ? "active" : ""}`}
+                      as={Link}
+                      to="/my-wall"
+                      onClick={() => setShow(false)}
+                    >
+                      My wall
+                    </Nav.Link>
+                  )}
+
+                  {/* title={<Avatar userImage={user?.userImage} />} */}
                   <NavDropdown
-                    title={<Avatar userImage={user?.userImage} />}
+                    title="More"
                     id={`offcanvasNavbarDropdown-expand-lg`}
-                    className="shadow-none"
+                    className={`shadow-none ${
+                      screenSize === "sm" || screenSize === "xs" ? "mb-4" : ""
+                    }`}
                   >
                     <NavDropdown.Item
                       className={`${
@@ -97,16 +112,6 @@ const MegaMenu = () => {
                     >
                       My account
                     </NavDropdown.Item>
-                    {user.isAdmin && (
-                      <NavDropdown.Item
-                        className={`${pathname === "/my-wall" ? "active" : ""}`}
-                        as={Link}
-                        to="/my-wall"
-                        onClick={() => setShow(false)}
-                      >
-                        My wall
-                      </NavDropdown.Item>
-                    )}
                     <NavDropdown.Item onClick={handleLogout} as={Button}>
                       Logout
                     </NavDropdown.Item>

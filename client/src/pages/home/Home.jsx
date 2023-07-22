@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row, Spinner } from "react-bootstrap";
+import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
 import SoicalCard from "../../components/card/SoicalCard";
 import SuggestionCard from "../../components/suggestionCard/SuggestionCard";
 import { BASE_URL } from "../../utils/config";
 import axios from "axios";
+import { GiGlassCelebration } from "react-icons/gi";
+import { LuSearch } from "react-icons/lu";
+import SearchModal from "../../components/searchModal/SearchModal";
 
 const Home = () => {
   const [allNotes, setAllNotes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [screenSize, setScreenSize] = useState("xl");
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     setIsLoading(true);
@@ -38,12 +43,20 @@ const Home = () => {
     <Container>
       <Row>
         <Col lg={`${screenSize === "sm" || screenSize === "xs" ? 12 : 8}`}>
-          <h5
-            className={`text-blue text-underline ${
-              screenSize === "sm" || screenSize === "xs" ? "text-center " : ""
-            }`}
-          >
+          <h5 className="d-flex justify-content-between align-items-end">
             <u>Social wall</u>
+            {screenSize === "sm" ||
+              (screenSize === "xs" && (
+                <Button
+                  variant="none"
+                  className="border-blue rounded-pill"
+                  onClick={handleShow}
+                >
+                  <div className="d-flex align-items-center">
+                    <LuSearch /> Search
+                  </div>
+                </Button>
+              ))}
           </h5>
           {isLoading ? (
             <div className="text-center">
@@ -73,9 +86,23 @@ const Home = () => {
               <SuggestionCard />
               <SuggestionCard />
             </div>
+
+            <div className="mt-4">
+              <p>
+                <h1>
+                  <GiGlassCelebration />
+                </h1>
+                <span>
+                  We have <br />
+                  <b>1090</b> users and <br />
+                  <b>240</b> live blogs right now!
+                </span>
+              </p>
+            </div>
           </div>
         </Col>
       </Row>
+      <SearchModal show={show} setShow={setShow} />
     </Container>
   );
 };

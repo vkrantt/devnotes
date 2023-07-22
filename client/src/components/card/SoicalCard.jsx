@@ -3,7 +3,6 @@ import { Button, Card } from "react-bootstrap";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { formatDate } from "../../utils/config";
 import { BiEdit, BiTrashAlt } from "react-icons/bi";
-import Loader from "../spinner/Loader";
 
 const SoicalCard = ({ note, handleDelete, isDeleteLoading }) => {
   const { pathname } = useLocation();
@@ -51,8 +50,7 @@ const SoicalCard = ({ note, handleDelete, isDeleteLoading }) => {
               onClick={() => handleDelete(note)}
             >
               <div className="d-flex align-items-center border-blue px-2 py-1">
-                <BiTrashAlt />
-                {isDeleteLoading ? <Loader /> : "DELETE"}
+                <BiTrashAlt /> DELETE
               </div>
             </Button>
           </div>
