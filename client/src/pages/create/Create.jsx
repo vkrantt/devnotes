@@ -20,30 +20,29 @@ const Create = () => {
     if (noteId) {
       setLoading(true);
       axios
-      .get(`${BASE_URL}/notebyid/${noteId}`, {
-        headers: {
-          "Content-Type": "application/type",
-          "auth-token": JSON.parse(localStorage.getItem("dev_token")),
-        },
-      })
-      .then(function (response) {
-       setGetNoteFromId(response.data.response)
-       const data = response.data.response         
-        setNote({
-          ...note,
-          title: data.title,
-          description : data.description,
-          socialShare : data.socialShare
+        .get(`${BASE_URL}/notebyid/${noteId}`, {
+          headers: {
+            "Content-Type": "application/type",
+            "auth-token": JSON.parse(localStorage.getItem("dev_token")),
+          },
         })
-  
-        setLoading(false);
-      })
-      .catch(function (error) {
-        setLoading(false);
-      });
+        .then(function (response) {
+          setGetNoteFromId(response.data.response);
+          const data = response.data.response;
+          setNote({
+            ...note,
+            title: data.title,
+            description: data.description,
+            socialShare: data.socialShare,
+          });
 
+          setLoading(false);
+        })
+        .catch(function (error) {
+          setLoading(false);
+        });
     }
-  }, [ noteId]);
+  }, [noteId]);
 
   const [note, setNote] = useState({
     title: "",
@@ -68,6 +67,8 @@ const Create = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const editorContent = document.getElementById("editor").innerHTML;
+    note.description = editorContent;
     if (note.description === "") {
       return alert("Please click on done button to add description.");
     }
@@ -87,10 +88,9 @@ const Create = () => {
           toast.success(response.data.response, toastConfig);
           setLoading(false);
           setTimeout(() => {
-            if(getNoteFromId?._id){
+            if (getNoteFromId?._id) {
               navigate("/my-wall");
-            }
-            else{
+            } else {
               navigate("/");
             }
           }, 500);
@@ -102,13 +102,13 @@ const Create = () => {
       });
   };
 
-  const checkForUpdate = (id)=>{
-    if(id){
+  const checkForUpdate = (id) => {
+    if (id) {
       return `${BASE_URL}/updatenote/${noteId}`;
-    }else{
+    } else {
       return `${BASE_URL}/create`;
     }
-  }
+  };
 
   return (
     <Container>
@@ -130,7 +130,10 @@ const Create = () => {
               </Form.Group>
             </Row>
 
-            <TextEditor setNote={setNote} description={getNoteFromId?.description} />
+            <TextEditor
+              setNote={setNote}
+              description={getNoteFromId?.description}
+            />
 
             <Form.Check
               type="switch"

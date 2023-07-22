@@ -1,14 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
-import { BASE_URL } from "../../utils/config";
+import { BASE_URL, toastConfig } from "../../utils/config";
 import SoicalCard from "../../components/card/SoicalCard";
 import { Link } from "react-router-dom";
+import { Toaster, toast } from "react-hot-toast";
 
 const MyWall = () => {
   const [allNotes, setAllNotes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [screenSize, setScreenSize] = useState("xl");
+  const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -41,16 +43,46 @@ const MyWall = () => {
     return "xl";
   };
 
+  const handleDelete = (note) => {
+    const confirmation = window.confirm(
+      "Are you sure!, This will delete permanently."
+    );
+    if (confirmation) {
+      setIsDeleteLoading(true);
+      const filteredNotes = allNotes.filter((item) => item._id !== note._id);
+      setAllNotes(filteredNotes);
+      axios
+        .delete(`${BASE_URL}/deletenote/${note._id}`, {
+          headers: {
+            "Content-Type": "application/type",
+            "auth-token": JSON.parse(localStorage.getItem("dev_token")),
+          },
+        })
+        .then((data) => {
+          toast.success(data.data.response, toastConfig);
+          setIsDeleteLoading(false);
+        });
+    }
+  };
+
   return (
     <Container>
       <Row>
         <Col lg={`${screenSize === "sm" || screenSize === "xs" ? 12 : 8}`}>
           <h5
-            className={`text-blue text-underline ${
+            className={`text-blue text-underline d-flex justify-content-between align-items-end ${
               screenSize === "sm" || screenSize === "xs" ? "text-center " : ""
             }`}
           >
             <u>My wall</u>
+
+            <Link
+              className="btn bg-blue rounded-0 text-light"
+              as={Link}
+              to="/create"
+            >
+              Create New
+            </Link>
           </h5>
           {isLoading ? (
             <div className="text-center">
@@ -59,29 +91,17 @@ const MyWall = () => {
           ) : (
             allNotes.map((note) => (
               <div key={note._id}>
-                <SoicalCard note={note} />
+                <SoicalCard
+                  note={note}
+                  handleDelete={handleDelete}
+                  isDeleteLoading={isDeleteLoading}
+                />
               </div>
             ))
           )}
         </Col>
-
-        <Col
-          lg="4"
-          className={`position-relative ${
-            screenSize === "sm" || screenSize === "xs" ? "d-none" : null
-          }`}
-        >
-          <div className="position-fixed">
-            <Link
-              className="btn bg-blue rounded-0 text-light"
-              as={Link}
-              to="/create"
-            >
-              Create New
-            </Link>
-          </div>
-        </Col>
       </Row>
+      <Toaster />
     </Container>
   );
 };

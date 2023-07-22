@@ -136,6 +136,24 @@ async function updateNoteById(req, res) {
   }
 }
 
+async function deleteNoteById(req, res) {
+  const { id } = req.params;
+  try {
+    const note = await Note.findById(id);
+    if (note) {
+      await Note.findByIdAndDelete(id);
+    }
+    res.status(200).json({
+      status: "ok",
+      response: "Note deleted.",
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      error: error,
+    });
+  }
+}
 module.exports = {
   getAllNotes,
   createNote,
@@ -143,4 +161,5 @@ module.exports = {
   getNoteByUser,
   updateNoteById,
   getNoteById,
+  deleteNoteById,
 };

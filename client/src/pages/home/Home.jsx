@@ -68,7 +68,7 @@ const Home = () => {
             <h5 className="text-blue">
               <u>Suggestions</u>
             </h5>
-            <div className="bg-blue p-2">
+            <div className="bg-blue d-flex flex-column gap-1 p-1 shadow">
               <SuggestionCard />
               <SuggestionCard />
               <SuggestionCard />

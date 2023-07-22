@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 
 const SuggestionCard = ({ user }) => {
   return (
-    <div className="d-flex align-items-center justify-content-between gap-3 bg-white my-2 p-2">
+    <div className="d-flex align-items-center justify-content-between gap-3 bg-white p-2 ">
       <img
         className="rounded-pill border-3 border-blue"
         src={

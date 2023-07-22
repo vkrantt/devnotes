@@ -1,0 +1,25 @@
+.fade.modal.show {
+  backdrop-filter: blur(15px) !important;
+  transition: all 0.1s ease;
+}
+
+.search-body {
+  max-height: 600px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.search-results {
+  max-height: 500px;
+  overflow: scroll;
+  border-radius: 10px;
+}
+
+.search-results::-webkit-scrollbar {
+  display: none !important;
+}
+
+.searchDataGrid:hover {
+  background: var(--theme) !important;
+  color: var(--secondTheme);
+}
