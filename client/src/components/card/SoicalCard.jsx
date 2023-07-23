@@ -26,10 +26,13 @@ const SoicalCard = ({ note, handleDelete, isDeleteLoading }) => {
               </NavLink>
             </p>
             <footer className="blockquote-footer text-blue">
-              John Doe experts in <cite title="Source Title">Engineering</cite>
+              {note.createdBy.username} experts in{" "}
+              <cite title={note.createdBy.expertise}>
+                <b>{note.createdBy.expertise}</b>
+              </cite>
             </footer>
             <h6 className="text-muted">
-              Last updated on {formatDate(note.createdAt)}
+              Last updated on {formatDate(note.updatedAt)}
             </h6>
           </blockquote>
         </Card.Body>

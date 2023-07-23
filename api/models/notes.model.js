@@ -5,6 +5,10 @@ const noteSchema = new mongoose.Schema(
     title: String,
     description: String,
     socialShare: Boolean,
+    createdBy: {
+      expertise: { type: String },
+      username: { type: String },
+    },
   },
   { timestamps: true }
 );

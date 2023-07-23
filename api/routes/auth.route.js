@@ -7,6 +7,7 @@ const {
   getUserById,
   updateUserById,
   deleteUserById,
+  getStatistic,
 } = require("../controllers/auth.controller");
 const authToken = require("../middlewares/verifyToken");
 const router = express.Router();
@@ -18,5 +19,6 @@ router.route("/changepassword/:id").post(changePassword);
 router.route("/getUserById/:id").get(authToken, getUserById);
 router.route("/updateUser/:id").post(authToken, updateUserById);
 router.route("/deleteUser/:id").post(authToken, deleteUserById);
+router.route("/statistics").get(getStatistic);
 
 module.exports = router;

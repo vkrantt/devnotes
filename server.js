@@ -3,9 +3,12 @@ const express = require("express");
 const databaseConnection = require("./api/database/database");
 const cors = require("cors");
 const server = express();
+const bodyParser = require("body-parser");
 
 server.use(express.json());
 server.use(cors());
+server.use(bodyParser.json({ limit: "50mb" }));
+server.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 // Database connection
 databaseConnection();

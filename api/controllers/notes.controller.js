@@ -3,7 +3,7 @@ const Note = require("../models/notes.model");
 
 async function getAllNotes(req, res) {
   try {
-    const notes = await Note.find({ socialShare: true });
+    const notes = await Note.find({ socialShare: true }).limit(10);
     res.status(200).json({
       status: "ok",
       response: notes,
@@ -19,12 +19,18 @@ async function getAllNotes(req, res) {
 async function createNote(req, res) {
   const userId = req.user;
   const { title, description, socialShare } = req.body;
+
   try {
-    const newNote = new Note({
+    const user = await User.findOne({ _id: userId });
+    const newNote = await new Note({
       userId: userId,
       title,
       description,
       socialShare,
+      createdBy: {
+        expertise: user.expertise,
+        username: user.firstName + " " + user.lastName,
+      },
     });
 
     const savedNote = await newNote.save();

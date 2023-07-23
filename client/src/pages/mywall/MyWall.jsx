@@ -99,6 +99,9 @@ const MyWall = () => {
               </div>
             ))
           )}
+          {!isLoading && allNotes.length === 0 && (
+            <center>No results found!</center>
+          )}
         </Col>
       </Row>
       <Toaster />

@@ -14,13 +14,25 @@ const Home = () => {
   const [screenSize, setScreenSize] = useState("xl");
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
+  const [usersCount, setUsersCount] = useState(null);
+  const [notesCount, setNotesCount] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
-    axios.get(`${BASE_URL}`).then((data) => {
-      setAllNotes(data.data.response);
-      setIsLoading(false);
-    });
+
+    Promise.all([
+      axios.get(`${BASE_URL}`),
+      axios.get(`${BASE_URL}/auth/statistics`),
+    ])
+      .then((responses) => {
+        setAllNotes(responses[0].data.response);
+        setUsersCount(responses[1].data.response.users);
+        setNotesCount(responses[1].data.response.notes);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
   }, []);
 
   useEffect(() => {
@@ -79,7 +91,7 @@ const Home = () => {
         >
           <div className="position-fixed">
             <h5 className="text-blue">
-              <u>Suggestions</u>
+              <u>Featured</u>
             </h5>
             <div className="bg-blue d-flex flex-column gap-1 p-1 shadow">
               <SuggestionCard />
@@ -94,8 +106,9 @@ const Home = () => {
                 </h1>
                 <span>
                   We have <br />
-                  <b>1090</b> users and <br />
-                  <b>240</b> live blogs right now!
+                  <b>{usersCount || 0}</b> developers and their
+                  <br />
+                  <b>{notesCount || 0}</b> live blogs right now!
                 </span>
               </p>
             </div>

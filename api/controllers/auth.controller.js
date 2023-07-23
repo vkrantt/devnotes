@@ -2,6 +2,7 @@ const User = require("../models/auth.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { BASE_URL } = require("../config/config");
+const Note = require("../models/notes.model");
 
 async function registerUser(req, res) {
   const { firstName, lastName, email, password } = req.body;
@@ -204,6 +205,25 @@ async function deleteUserById(req, res) {
   }
 }
 
+async function getStatistic(req, res) {
+  try {
+    const users = await User.find({}).count();
+    const notes = await Note.find({ socialShare: true }).count();
+    res.status(200).json({
+      status: "ok",
+      response: {
+        users,
+        notes,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      error: error,
+    });
+  }
+}
+
 module.exports = {
   registerUser,
   loginUser,
@@ -212,4 +232,5 @@ module.exports = {
   getUserById,
   updateUserById,
   deleteUserById,
+  getStatistic,
 };
