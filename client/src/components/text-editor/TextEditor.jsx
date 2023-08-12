@@ -11,6 +11,10 @@ function TextEditor({ setNote, description }) {
   }, [description]);
 
   const applyStyle = (style, value = null) => {
+    if (style === "code") {
+      value = `<code>${window.getSelection().toString()}</code>`;
+      style = "insertHTML";
+    }
     document.execCommand(style, false, value);
   };
 
@@ -25,35 +29,40 @@ function TextEditor({ setNote, description }) {
     document.execCommand("insertImage", false, url);
   };
 
+  const handleTextColorChange = (event) => {
+    const color = event.target.value;
+    applyStyle("foreColor", color);
+  };
+
   return (
     <div>
-      <div className="d-flex flex-wrap align-items-center mb-3">
+      <div className="d-flex flex-wrap align-items-center mb-3 border border-2 shadow-sm">
         <Button
-          variant="light"
+          variant="none"
           type="button"
-          className=" rounded-0 btn-sm me-2"
+          className=" bg-blue text-light rounded-0 btn-sm "
           onClick={() => applyStyle("bold")}
         >
           <b>B</b>
         </Button>
         <Button
-          variant="light"
+          variant="none"
           type="button"
-          className=" rounded-0 btn-sm me-2"
+          className=" bg-blue text-light rounded-0 btn-sm "
           onClick={() => applyStyle("italic")}
         >
           <i>I</i>
         </Button>
         <Button
-          variant="light"
+          variant="none"
           type="button"
-          className=" rounded-0 btn-sm me-2"
+          className=" bg-blue text-light rounded-0 btn-sm me-2"
           onClick={() => applyStyle("underline")}
         >
           <u>U</u>
         </Button>
         <select
-          className="rounded-0 bg-light btn-sm me-1 border-0 py-1"
+          className="rounded-0 bg-blue text-light btn-sm me-1 border-0 py-1"
           onChange={(e) => applyFontSize(e.target.value)}
         >
           <option value="">Font</option>
@@ -66,53 +75,59 @@ function TextEditor({ setNote, description }) {
         </select>
 
         <Button
-          variant="light"
+          variant="none"
           type="button"
-          className=" rounded-0 btn-sm me-1"
+          className="bg-blue text-light rounded-0 btn-sm me-1"
           onClick={handleImageSelect}
         >
           <BiImage />
         </Button>
         <Button
-          variant="light"
+          variant="none"
           type="button"
-          className=" rounded-0 btn-sm me-1"
+          className="bg-blue text-light rounded-0 btn-sm me-1"
           onClick={() => applyStyle("formatBlock", "p")}
         >
           <BsTextParagraph />
         </Button>
         <Button
-          variant="light"
+          variant="none"
           type="button"
-          className=" rounded-0 btn-sm me-1"
+          className="bg-blue text-light rounded-0 btn-sm me-1"
           onClick={() => applyStyle("insertLineBreak")}
         >
           <BsArrowReturnLeft />
         </Button>
         <Button
-          variant="light"
+          variant="none"
           type="button"
-          className=" rounded-0 btn-sm me-1"
+          className="bg-blue text-light rounded-0 btn-sm "
           onClick={() => document.execCommand("undo")}
         >
           <BiUndo />
         </Button>
         <Button
-          variant="light"
+          variant="none"
           type="button"
-          className=" rounded-0 btn-sm me-1"
+          className="bg-blue text-light rounded-0 btn-sm me-1"
           onClick={() => document.execCommand("redo")}
         >
           <BiRedo />
         </Button>
         <Button
-          variant="light"
+          variant="none"
           type="button"
-          className=" rounded-0 btn-sm me-1"
+          className="bg-blue text-light rounded-0 btn-sm me-1"
           onClick={() => applyStyle("formatBlock", "pre")}
         >
           <BiCodeAlt />
         </Button>
+
+        <input
+          type="color"
+          className="rounded-0 bg-light btn-sm me-1 border-0 py-1"
+          onChange={handleTextColorChange}
+        />
       </div>
 
       <div
