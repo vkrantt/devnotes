@@ -31,6 +31,7 @@ const MyAccount = () => {
           expertise: data.expertise,
           city: data.city,
           state: data.state,
+          userImage: data.userImage,
         });
         setLoading(false);
       })
@@ -49,6 +50,7 @@ const MyAccount = () => {
     confirmPassword: "",
     city: "",
     state: "",
+    userImage: "",
   });
 
   const handleChange = (e) => {
@@ -126,6 +128,12 @@ const MyAccount = () => {
     <Container>
       <Row>
         <Col lg="8" md="12" sm="12" className="m-auto mb-5">
+          <img
+            src={form.userImage}
+            alt={form.firstName}
+            className="border-blue border-3 rounded-circle"
+            style={{ width: "80px" }}
+          />
           <Form>
             <Row className="mb-3">
               <u className="text-primary">Must details</u>

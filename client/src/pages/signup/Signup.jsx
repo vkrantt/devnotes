@@ -6,19 +6,20 @@ import axios from "axios";
 import { BASE_URL } from "../../utils/config";
 import Loader from "../../components/spinner/Loader";
 import toast, { Toaster } from "react-hot-toast";
-import { toastConfig, storageService } from "../../utils/config";
+import { toastConfig } from "../../utils/config";
 import { FcCheckmark } from "react-icons/fc";
 import { IoCloseSharp } from "react-icons/io5";
 
 const Signup = () => {
+  const [seed] = useState(Math.floor(Math.random() * 5000));
   const [credentials, setCredentials] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
+    image: `https://avatars.dicebear.com/api/human/${seed}.svg`,
   });
   const [loading, setLoading] = useState(false);
-
   const [lowerCheck, setLowerCheck] = useState(false);
   const [upperCheck, setupperCheck] = useState(false);
   const [numberCheck, setNumberCheck] = useState(false);

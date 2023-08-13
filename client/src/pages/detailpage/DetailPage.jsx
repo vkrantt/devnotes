@@ -50,7 +50,9 @@ const DetailPage = () => {
               </Col>
             </Row>
 
-            <p dangerouslySetInnerHTML={{ __html: noteDetail.description }}></p>
+            <Col
+              dangerouslySetInnerHTML={{ __html: noteDetail.description }}
+            ></Col>
           </Col>
         </Row>
       )}

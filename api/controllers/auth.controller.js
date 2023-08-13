@@ -5,7 +5,7 @@ const { BASE_URL } = require("../config/config");
 const Note = require("../models/notes.model");
 
 async function registerUser(req, res) {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, image } = req.body;
   try {
     const user = await User.findOne({ email });
     if (user) {
@@ -20,6 +20,7 @@ async function registerUser(req, res) {
       lastName,
       email,
       password: hash,
+      userImage: image,
     });
 
     const savedUser = await newUser.save();
