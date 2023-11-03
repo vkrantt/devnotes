@@ -16,6 +16,7 @@ databaseConnection();
 // Routes
 server.use("/api", require("./api/routes/notes.route"));
 server.use("/api/auth", require("./api/routes/auth.route"));
+server.use("/api/featured", require("./api/routes/featured.route"));
 
 // root route
 server.get("/", (req, res) => {

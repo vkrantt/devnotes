@@ -3,7 +3,9 @@ const Note = require("../models/notes.model");
 
 async function getAllNotes(req, res) {
   try {
-    const notes = await Note.find({ socialShare: true }).limit(10);
+    const notes = await Note.find({ socialShare: true })
+      .sort({ _id: -1 })
+      .limit(10);
     res.status(200).json({
       status: "ok",
       response: notes,
@@ -83,7 +85,7 @@ async function getNoteDetail(req, res) {
 async function getNoteByUser(req, res) {
   const id = req.user;
   try {
-    const notes = await Note.find({ userId: id });
+    const notes = await Note.find({ userId: id }).sort({ _id: -1 });
     res.status(200).json({
       status: "ok",
       response: notes,

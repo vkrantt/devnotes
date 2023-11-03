@@ -12,12 +12,14 @@ const SuggestionCard = ({ user }) => {
             : "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
         }
         style={{ width: "50px", height: "50px" }}
-        alt="im"
+        alt="img"
       />
       <div className="pt-3">
-        <h6 className="text-blue">{user?.username || "username"}</h6>
+        <h6 className="text-blue">
+          {user?.firstName} {user?.lastName}
+        </h6>
         <p className="text-muted">
-          Experts in "{user?.expertise ? user?.expertise : "Design"}"
+          Experts in "{user?.expertise ? user?.expertise : "UI"}"
         </p>
       </div>
       <Button className="bg-blue rounded-0 px-4 text-light mt-4 border-0 mb-3">

@@ -8,10 +8,12 @@ const {
   updateUserById,
   deleteUserById,
   getStatistic,
+  findUserByEmail,
 } = require("../controllers/auth.controller");
 const authToken = require("../middlewares/verifyToken");
 const router = express.Router();
 
+router.route("/").get(authToken, findUserByEmail);
 router.route("/register").post(registerUser);
 router.route("/login").post(loginUser);
 router.route("/forgotpassword").post(forgotPassword);

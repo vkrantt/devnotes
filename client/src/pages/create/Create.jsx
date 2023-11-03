@@ -151,7 +151,7 @@ const Create = () => {
               onClick={handleSubmit}
               disabled={!note.title}
             >
-              {loading ? <Loader /> : getNoteFromId ? "Update Post" : "Post"}
+              {loading ? <Loader /> : getNoteFromId ? "Update" : "Share"}
             </Button>
           </Form>
         </Col>

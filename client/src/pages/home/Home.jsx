@@ -16,6 +16,7 @@ const Home = () => {
   const handleShow = () => setShow(true);
   const [usersCount, setUsersCount] = useState(null);
   const [notesCount, setNotesCount] = useState(null);
+  const [featuredUsers, setFeaturedUsers] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -50,6 +51,18 @@ const Home = () => {
     if (width <= 1200) return "lg";
     return "xl";
   };
+
+  useEffect(() => {
+    axios
+      .get(`${BASE_URL}/featured`, {
+        headers: {
+          "Content-Type": "application/type",
+        },
+      })
+      .then((data) => {
+        setFeaturedUsers(data.data.response);
+      });
+  }, []);
 
   return (
     <Container>
@@ -93,11 +106,16 @@ const Home = () => {
             <h5 className="text-blue">
               <u>Featured</u>
             </h5>
-            <div className="bg-blue d-flex flex-column gap-1 p-1 shadow">
-              <SuggestionCard />
-              <SuggestionCard />
-              <SuggestionCard />
-            </div>
+
+            {featuredUsers?.length && (
+              <div className="bg-blue d-flex flex-column gap-1 p-1 shadow">
+                {featuredUsers?.map((user, i) => (
+                  <div key={i}>
+                    <SuggestionCard user={user} />
+                  </div>
+                ))}
+              </div>
+            )}
 
             <div className="mt-4">
               <p>

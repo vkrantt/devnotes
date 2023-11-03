@@ -112,6 +112,16 @@ const MegaMenu = () => {
                     >
                       My account
                     </NavDropdown.Item>
+
+                    <NavDropdown.Item
+                      className={`${pathname === "/feature" ? "active" : ""}`}
+                      onClick={() => setShow(false)}
+                      as={Link}
+                      to="/feature"
+                    >
+                      Feature
+                    </NavDropdown.Item>
+
                     <NavDropdown.Item onClick={handleLogout} as={Button}>
                       Logout
                     </NavDropdown.Item>

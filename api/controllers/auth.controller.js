@@ -225,6 +225,23 @@ async function getStatistic(req, res) {
   }
 }
 
+async function findUserByEmail(req, res) {
+  const keyword = req.query.search
+    ? {
+        $or: [
+          {
+            name: { $regex: req.query.search, $options: "i" },
+          },
+          {
+            email: { $regex: req.query.search, $options: "i" },
+          },
+        ],
+      }
+    : {};
+  const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+  res.send(users);
+}
+
 module.exports = {
   registerUser,
   loginUser,
@@ -234,4 +251,5 @@ module.exports = {
   updateUserById,
   deleteUserById,
   getStatistic,
+  findUserByEmail,
 };

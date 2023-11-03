@@ -14,6 +14,7 @@ import DetailPage from "./pages/detailpage/DetailPage";
 import MyWall from "./pages/mywall/MyWall";
 import { getUserDetail } from "./service/user";
 import ProtectForAdmin from "./routes/ProtectForAdmin";
+import Feature from "./pages/feature/Feature";
 
 const App = () => {
   const [user] = useState(getUserDetail());
@@ -28,6 +29,10 @@ const App = () => {
           <Route
             path="/my-account"
             element={<ProtectedRoute children={<MyAccount />} />}
+          />
+          <Route
+            path="/feature"
+            element={<ProtectedRoute children={<Feature />} />}
           />
           <Route
             path="/my-wall"

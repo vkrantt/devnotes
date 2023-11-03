@@ -34,6 +34,19 @@ function TextEditor({ setNote, description }) {
     applyStyle("foreColor", color);
   };
 
+  // Reset all fomatting
+  const resetFormatting = () => {
+    const selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0);
+      const newNode = document.createElement("div");
+      newNode.appendChild(range.cloneContents());
+      const plainText = newNode.textContent;
+      range.deleteContents();
+      range.insertNode(document.createTextNode(plainText));
+    }
+  };
+
   return (
     <div>
       <div className="d-flex flex-wrap align-items-center mb-3 border border-2 shadow-sm">
@@ -128,6 +141,15 @@ function TextEditor({ setNote, description }) {
           className="rounded-0 bg-light btn-sm me-1 border-0 py-1"
           onChange={handleTextColorChange}
         />
+
+        <Button
+          variant="none"
+          type="button"
+          className="bg-blue text-light rounded-0 btn-sm me-1"
+          onClick={resetFormatting}
+        >
+          Reset
+        </Button>
       </div>
 
       <div
