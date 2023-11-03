@@ -16,8 +16,8 @@ const SuggestionCard = ({ user }) => {
       />
       <div className="pt-3">
         <h6 className="text-blue">
-          {user.username
-            ? user.username
+          {user?.username
+            ? user?.username
             : `${user?.firstName} ${user?.lastName}`}
         </h6>
         <p className="text-muted">
