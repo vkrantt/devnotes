@@ -121,7 +121,7 @@ const Feature = () => {
               <Input
                 label="Search"
                 type="text"
-                placeholder="Email adddress"
+                placeholder="Email address"
                 name="Search"
                 onChange={handleInputChange}
                 value={searchTerm}

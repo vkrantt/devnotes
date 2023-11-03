@@ -32,7 +32,7 @@ const App = () => {
           />
           <Route
             path="/feature"
-            element={<ProtectedRoute children={<Feature />} />}
+            element={<ProtectForAdmin children={<Feature />} />}
           />
           <Route
             path="/my-wall"
