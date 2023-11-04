@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import React, { useState } from "react";
+import { Form } from "react-bootstrap";
 import "./Search.css";
 import SearchModal from "../searchModal/SearchModal";
 
@@ -10,7 +10,7 @@ const Search = () => {
 
   return (
     <>
-      <Form className="d-flex bg-light justify-content-between border-blue position-relative">
+      <Form className="d-flex bg-light justify-content-between position-relative rounded-pill overflow-hidden">
         <Form.Control
           type="search"
           placeholder="Search"
@@ -20,12 +20,6 @@ const Search = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           value={searchQuery}
         />
-        <Button
-          variant="none"
-          className="rounded-0 shadow-none border text-light bg-blue "
-        >
-          Search
-        </Button>
       </Form>
 
       <SearchModal show={show} setShow={setShow} />

@@ -49,13 +49,12 @@ const ForgotPassword = () => {
               );
               setEmail("");
             })
-            .catch((error) => console.log("error", error));
+            .catch(() => setLoading(false));
         }
         setLoading(false);
       })
-      .catch(function (error) {
+      .catch(function () {
         setLoading(false);
-        console.log(error);
       });
   };
 

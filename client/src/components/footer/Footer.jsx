@@ -5,7 +5,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
     <Container fluid className="bg-blue">
-      <Container className="bg-blue text-light d-flex justify-content-between py-4">
+      <Container className="bg-blue text-light d-flex justify-content-between pt-3">
         <p>1.0.1</p>
         <p>
           &copy; {currentYear} <u>devshare</u>

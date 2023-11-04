@@ -15,7 +15,6 @@ const Feature = () => {
   const [featuredUsers, setFeaturedUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
-  const [featureLoading, setFeatureLoading] = useState(false);
 
   useEffect(() => {
     if (!searchTerm) setUsers([]);
@@ -55,7 +54,6 @@ const Feature = () => {
   const handleCreateFeatureAccount = (user) => {
     const { firstName, lastName, email, userImage, expertise } = user;
     const formData = { firstName, lastName, email, userImage, expertise };
-    setFeatureLoading(true);
     axios
       .post(`${BASE_URL}/featured/adduser`, formData, {
         headers: {
@@ -72,10 +70,6 @@ const Feature = () => {
         } else {
           toast.success(response.data.response, toastConfig);
         }
-        setFeatureLoading(false);
-      })
-      .catch(function (error) {
-        setFeatureLoading(false);
       });
   };
 
@@ -139,6 +133,7 @@ const Feature = () => {
                         onClick={() => handleCreateFeatureAccount(user)}
                         key={user._id}
                         className="mb-2 bg-white p-2"
+                        style={{ cursor: "pointer" }}
                       >
                         {user.firstName} {user.lastName} - {user.email}
                       </h6>
@@ -157,9 +152,9 @@ const Feature = () => {
                     {user.firstName} {user.lastName} - {user.email}
                     <div className="d-flex align-items-center">
                       <Button
-                        variant="none"
+                        variant="outline-dark"
                         size="sm"
-                        className="btn p-0 border-0 shadow-none me-2"
+                        className="btn p-0 me-2"
                         onClick={() => handleDelete(user._id)}
                       >
                         <div className="d-flex align-items-center border-blue px-2 py-1">

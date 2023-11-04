@@ -16,50 +16,47 @@ const SoicalCard = ({ note, handleDelete, isDeleteLoading }) => {
   };
 
   return (
-    <div>
-      <Card className="border-0 border-bottom border-blue border-3 rounded-0">
-        <Card.Body className="px-0">
-          <blockquote className="blockquote mb-0">
-            <p>
-              <NavLink to={`detail/${note._id}`} className="socialTitle">
-                {note?.title}
-              </NavLink>
-            </p>
-            <footer className="blockquote-footer text-blue">
-              {note?.createdBy?.username} experts in{" "}
-              <cite title={note?.createdBy?.expertise}>
-                <b>{note?.createdBy?.expertise}</b>
-              </cite>
-            </footer>
-            <h6 className="text-muted">
-              Last updated on {formatDate(note?.updatedAt)}
-            </h6>
-          </blockquote>
-        </Card.Body>
-        {pathname === "/my-wall" && (
-          <div className="d-flex align-items-center mb-2">
-            <Button
-              variant="none"
-              className="btn p-0 border-0 shadow-none me-2"
-              onClick={() => handleEdit(note)}
-            >
-              <div className="d-flex align-items-center border-blue px-2 py-1">
-                <BiEdit /> EDIT
-              </div>
-            </Button>
-            <Button
-              variant="none"
-              className="btn p-0 border-0 shadow-none me-2"
-              onClick={() => handleDelete(note)}
-            >
-              <div className="d-flex align-items-center border-blue px-2 py-1">
-                <BiTrashAlt /> DELETE
-              </div>
-            </Button>
-          </div>
-        )}
-      </Card>
-    </div>
+    <Card className="border-0 border-bottom border-blue border-3 rounded-0 mb-3">
+      <Card.Body className="p-0">
+        <blockquote className="blockquote mb-0">
+          <NavLink to={`detail/${note._id}`} className="socialTitle">
+            {note?.title}
+          </NavLink>
+          <footer className="fs-6 text-muted">
+            <div className="d-flex justify-content-between align-items-center">
+              <div>{note?.createdBy?.username}</div>
+              <h6 className="text-muted">
+                Updated on {formatDate(note?.updatedAt)}
+              </h6>
+            </div>
+          </footer>
+        </blockquote>
+      </Card.Body>
+      {pathname === "/my-wall" && (
+        <div className="d-flex align-items-center mb-2">
+          <Button
+            variant="outline-dark"
+            size="sm"
+            className="btn p-0 me-2"
+            onClick={() => handleEdit(note)}
+          >
+            <div className="d-flex align-items-center border-blue px-2 py-1">
+              <BiEdit /> EDIT
+            </div>
+          </Button>
+          <Button
+            variant="outline-dark"
+            size="sm"
+            className="btn p-0 me-2"
+            onClick={() => handleDelete(note)}
+          >
+            <div className="d-flex align-items-center border-blue px-2 py-1">
+              <BiTrashAlt /> DELETE
+            </div>
+          </Button>
+        </div>
+      )}
+    </Card>
   );
 };
 

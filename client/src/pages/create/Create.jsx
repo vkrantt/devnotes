@@ -14,6 +14,12 @@ const Create = () => {
   const noteId = searchParams.get("id");
   const navigate = useNavigate();
   const [getNoteFromId, setGetNoteFromId] = useState();
+  const [note, setNote] = useState({
+    title: "",
+    description: "",
+    socialShare: false,
+  });
+  const [loading, setLoading] = useState(false);
 
   // date note details For update
   useEffect(() => {
@@ -38,18 +44,11 @@ const Create = () => {
 
           setLoading(false);
         })
-        .catch(function (error) {
+        .catch(function () {
           setLoading(false);
         });
     }
   }, [noteId]);
-
-  const [note, setNote] = useState({
-    title: "",
-    description: "",
-    socialShare: false,
-  });
-  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setNote({
@@ -116,7 +115,7 @@ const Create = () => {
         <Col lg="8" md="12" sm="12" className="m-auto mb-5">
           <Form>
             <Row className="mb-3">
-              <h5 className="text-blue">Create new note</h5>
+              <h5 className="text-blue">Create and share</h5>
             </Row>
             <Row className="mb-3">
               <Form.Group as={Col}>

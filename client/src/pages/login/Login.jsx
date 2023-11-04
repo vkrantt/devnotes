@@ -124,9 +124,7 @@ const Login = () => {
                 placeholder="Enter your password"
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Remember me" />
-            </Form.Group>
+
             <Button
               disabled={
                 !credentials.email ||

@@ -155,9 +155,7 @@ const Signup = () => {
                 placeholder="Enter your password"
               />
             </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Check type="checkbox" label="Remember me" />
-            </Form.Group>
+
             <Button
               disabled={!credentials.email || !credentials.password}
               variant="none"

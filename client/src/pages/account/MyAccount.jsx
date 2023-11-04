@@ -8,10 +8,21 @@ import { getUserDetail } from "../../service/user";
 import Loader from "../../components/spinner/Loader";
 
 const MyAccount = () => {
-  const [user, setUser] = useState();
   const [loading, setLoading] = useState(false);
   const [profileLoading, setProfileLoading] = useState(false);
   const loggedInUser = getUserDetail();
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    expertise: "",
+    existingPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+    city: "",
+    state: "",
+    userImage: "",
+  });
 
   useEffect(() => {
     setLoading(true);
@@ -22,7 +33,6 @@ const MyAccount = () => {
         },
       })
       .then(function (response) {
-        setUser(response.data.response);
         const data = response.data.response;
         setForm({
           firstName: data.firstName,
@@ -39,19 +49,6 @@ const MyAccount = () => {
         setLoading(false);
       });
   }, [loggedInUser.id]);
-
-  const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    expertise: "",
-    existingPassword: "",
-    newPassword: "",
-    confirmPassword: "",
-    city: "",
-    state: "",
-    userImage: "",
-  });
 
   const handleChange = (e) => {
     setForm({
@@ -124,6 +121,7 @@ const MyAccount = () => {
         });
     }
   };
+
   return (
     <Container>
       <Row>

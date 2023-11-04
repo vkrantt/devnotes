@@ -21,7 +21,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <div style={{ minHeight: "calc(100vh - 88px)" }}>
+      <div style={{ minHeight: "calc(100vh - 57px)" }}>
         <MegaMenu />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -53,7 +53,6 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/change-password" element={<ChangePassword />} />
-
           <Route path="/*" element={<Navigate to="/" />} />
         </Routes>
       </div>

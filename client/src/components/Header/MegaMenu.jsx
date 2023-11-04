@@ -120,7 +120,7 @@ const MegaMenu = () => {
                         as={Link}
                         to="/feature"
                       >
-                        Feature
+                        Featured
                       </NavDropdown.Item>
                     )}
 

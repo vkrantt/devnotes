@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Col,
+  Container,
+  Placeholder,
+  Row,
+  Spinner,
+} from "react-bootstrap";
 import SoicalCard from "../../components/card/SoicalCard";
 import SuggestionCard from "../../components/suggestionCard/SuggestionCard";
 import { BASE_URL } from "../../utils/config";
@@ -17,6 +25,7 @@ const Home = () => {
   const [usersCount, setUsersCount] = useState(null);
   const [notesCount, setNotesCount] = useState(null);
   const [featuredUsers, setFeaturedUsers] = useState([]);
+  const [featuredLoading, setFeaturedLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -31,7 +40,7 @@ const Home = () => {
         setNotesCount(responses[1].data.response.notes);
         setIsLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         setIsLoading(false);
       });
   }, []);
@@ -53,6 +62,7 @@ const Home = () => {
   };
 
   useEffect(() => {
+    setFeaturedLoading(true);
     axios
       .get(`${BASE_URL}/featured`, {
         headers: {
@@ -61,6 +71,10 @@ const Home = () => {
       })
       .then((data) => {
         setFeaturedUsers(data.data.response);
+        setFeaturedLoading(false);
+      })
+      .catch(() => {
+        setFeaturedLoading(false);
       });
   }, []);
 
@@ -106,9 +120,44 @@ const Home = () => {
             <h5 className="text-blue">
               <u>Featured</u>
             </h5>
-
-            {featuredUsers?.length && (
-              <div className="bg-blue d-flex flex-column gap-1 p-1 shadow">
+            {featuredLoading && (
+              <>
+                <Card className="shadow-sm border-blue border-2">
+                  <Card.Body>
+                    <Row className="d-flex">
+                      <Col>
+                        <Placeholder as={Card.Text} animation="glow">
+                          <Placeholder xs={7} />
+                          <Placeholder xs={12} />
+                        </Placeholder>
+                      </Col>
+                    </Row>
+                  </Card.Body>
+                  <Card.Body>
+                    <Row className="d-flex">
+                      <Col>
+                        <Placeholder as={Card.Text} animation="glow">
+                          <Placeholder xs={7} />
+                          <Placeholder xs={12} />
+                        </Placeholder>
+                      </Col>
+                    </Row>
+                  </Card.Body>
+                  <Card.Body>
+                    <Row className="d-flex">
+                      <Col>
+                        <Placeholder as={Card.Text} animation="glow">
+                          <Placeholder xs={7} />
+                          <Placeholder xs={12} />
+                        </Placeholder>
+                      </Col>
+                    </Row>
+                  </Card.Body>
+                </Card>
+              </>
+            )}
+            {featuredUsers?.length > 0 && (
+              <div className="d-flex pb-3 flex-column rounded-3 overflow-hidden shadow-sm px-3 border-blue border-3">
                 {featuredUsers?.map((user, i) => (
                   <div key={i}>
                     <SuggestionCard user={user} />
@@ -118,17 +167,17 @@ const Home = () => {
             )}
 
             <div className="mt-4">
-              <p>
-                <h1>
-                  <GiGlassCelebration />
-                </h1>
+              <div>
+                <div>
+                  <GiGlassCelebration style={{ fontSize: "36px" }} />
+                </div>
                 <span>
-                  We have <br />
+                  There is <br />
                   <b>{usersCount || 0}</b> developers and their
                   <br />
                   <b>{notesCount || 0}</b> live blogs right now!
                 </span>
-              </p>
+              </div>
             </div>
           </div>
         </Col>

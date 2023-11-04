@@ -23,7 +23,7 @@ const DetailPage = () => {
         setNoteDetail(response.data.response);
         setLoading(false);
       })
-      .catch(function (error) {
+      .catch(function () {
         setLoading(false);
       });
   }, [params.id]);
@@ -44,7 +44,7 @@ const DetailPage = () => {
               </p>
             </div>
 
-            <Row className="d-flex align-items-center justify-content-between">
+            <Row className="d-flex align-items-center justify-content-between mb-5">
               <Col lg="6">
                 <SuggestionCard user={noteDetail.createdBy} />
               </Col>
