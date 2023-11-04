@@ -74,7 +74,7 @@ const MyWall = () => {
               screenSize === "sm" || screenSize === "xs" ? "text-center " : ""
             }`}
           >
-            <u>My wall</u>
+            <div className="text-decoration-underline">My wall</div>
 
             <Link
               className="btn bg-blue rounded-0 text-light"

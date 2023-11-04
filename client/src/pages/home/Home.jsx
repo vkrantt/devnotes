@@ -83,7 +83,7 @@ const Home = () => {
       <Row>
         <Col lg={`${screenSize === "sm" || screenSize === "xs" ? 12 : 8}`}>
           <h5 className="d-flex justify-content-between align-items-end">
-            <u>Social wall</u>
+            <div className="text-decoration-underline">Social wall</div>
             {screenSize === "sm" ||
               (screenSize === "xs" && (
                 <Button
@@ -117,9 +117,7 @@ const Home = () => {
           }`}
         >
           <div className="position-fixed">
-            <h5 className="text-blue">
-              <u>Featured</u>
-            </h5>
+            <div className="text-decoration-underline">Featured</div>
             {featuredLoading && (
               <>
                 <Card className="shadow-sm border-blue border-2">
@@ -167,17 +165,12 @@ const Home = () => {
             )}
 
             <div className="mt-4">
-              <div>
-                <div>
-                  <GiGlassCelebration style={{ fontSize: "36px" }} />
-                </div>
-                <span>
-                  There is <br />
-                  <b>{usersCount || 0}</b> developers and their
-                  <br />
-                  <b>{notesCount || 0}</b> live blogs right now!
-                </span>
-              </div>
+              <GiGlassCelebration style={{ fontSize: "36px" }} />
+              <p>
+                <b>{usersCount || 0}</b> developers and their
+                <br />
+                <b>{notesCount || 0}</b> live blogs right now!
+              </p>
             </div>
           </div>
         </Col>

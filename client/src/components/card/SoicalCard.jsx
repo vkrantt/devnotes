@@ -18,7 +18,7 @@ const SoicalCard = ({ note, handleDelete, isDeleteLoading }) => {
   return (
     <Card className="border-0 border-bottom border-blue border-3 rounded-0 mb-3">
       <Card.Body className="p-0">
-        <blockquote className="blockquote mb-0">
+        <div className="blockquote mb-0">
           <NavLink to={`detail/${note._id}`} className="socialTitle">
             {note?.title}
           </NavLink>
@@ -30,7 +30,7 @@ const SoicalCard = ({ note, handleDelete, isDeleteLoading }) => {
               </h6>
             </div>
           </footer>
-        </blockquote>
+        </div>
       </Card.Body>
       {pathname === "/my-wall" && (
         <div className="d-flex align-items-center mb-2">

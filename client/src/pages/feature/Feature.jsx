@@ -107,7 +107,7 @@ const Feature = () => {
       <Row>
         <Col lg="8" md="12" sm="12" className="m-auto mb-5">
           <span className="text-primary">
-            <u>Featured</u>
+            <div className="text-decoration-underline">Featured</div>
           </span>
 
           <div className="mt-4">
@@ -144,7 +144,7 @@ const Feature = () => {
 
             <div className="my-4">
               <span className="text-primary my-2">
-                <u>Featured users</u>
+                <div className="text-decoration-underline">Featured users</div>
               </span>
               {featuredUsers?.map((user, i) => (
                 <div key={i} className="my-2 bg-light">
