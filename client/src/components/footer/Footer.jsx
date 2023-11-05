@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <Container fluid className="bg-blue">
       <Container className="bg-blue text-light d-flex justify-content-between pt-3">
-        <p>1.0.1</p>
+        <p>1.0.3</p>
         <div>
           &copy; {currentYear}{" "}
           <span className="text-decoration-underline">devshare</span>
