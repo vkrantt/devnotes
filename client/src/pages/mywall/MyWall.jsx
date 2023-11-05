@@ -77,7 +77,7 @@ const MyWall = () => {
             <div className="text-decoration-underline">My wall</div>
 
             <Link
-              className="btn bg-blue rounded-0 text-light"
+              className="btn bg-blue rounded-2 text-light"
               as={Link}
               to="/create"
             >

@@ -28,7 +28,7 @@ const Input = ({ name, value, onChange, label, type, placeholder, style }) => {
         type={type === "password" ? (isShow ? "text" : "password") : type}
         placeholder={placeholder}
         style={style}
-        className="position-relative border-muted rounded-0 shadow-sm border-2"
+        className="position-relative border-muted rounded-2 shadow-sm border-2"
       />
     </>
   );

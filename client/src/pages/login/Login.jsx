@@ -136,7 +136,7 @@ const Login = () => {
                 !lengthCheck
               }
               variant="none"
-              className="bg-blue rounded-0 px-4 text-light"
+              className="bg-blue rounded-2 px-4 text-light"
               type="submit"
               onClick={handleSubmit}
             >

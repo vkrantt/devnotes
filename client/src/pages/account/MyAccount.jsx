@@ -258,7 +258,7 @@ const MyAccount = () => {
 
             <Button
               variant="none"
-              className="bg-blue rounded-0 px-4 text-light mt-4"
+              className="bg-blue rounded-2 px-4 text-light mt-4"
               type="submit"
               onClick={handleSubmit}
             >
@@ -280,7 +280,7 @@ const MyAccount = () => {
             <Col>
               <Button
                 variant="none"
-                className="bg-danger rounded-0 px-4 text-light"
+                className="bg-danger rounded-2 px-4 text-light"
                 type="button"
                 onClick={handleDelete}
               >

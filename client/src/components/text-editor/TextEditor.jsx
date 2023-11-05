@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { BiUndo, BiRedo, BiCodeAlt, BiImage } from "react-icons/bi";
 import { BsArrowReturnLeft, BsTextParagraph } from "react-icons/bs";
+import { PiListNumbersBold } from "react-icons/pi";
+import { MdFormatListBulleted } from "react-icons/md";
 
 function TextEditor({ setNote, description }) {
   useEffect(() => {
@@ -47,9 +49,17 @@ function TextEditor({ setNote, description }) {
     }
   };
 
+  const addBullets = () => {
+    document.execCommand("insertUnorderedList", false, null);
+  };
+
+  const addNumbers = () => {
+    document.execCommand("insertOrderedList", false, null);
+  };
+
   return (
     <div>
-      <div className="d-flex flex-wrap align-items-center mb-3 border border-2 shadow-sm">
+      <div className="d-flex flex-wrap align-items-center mb-3 border border-2 shadow-sm rounded-2 overflow-hidden">
         <Button
           variant="none"
           type="button"
@@ -136,6 +146,24 @@ function TextEditor({ setNote, description }) {
           <BiCodeAlt />
         </Button>
 
+        <Button
+          variant="none"
+          type="button"
+          className="bg-blue text-light rounded-0 btn-sm me-1"
+          onClick={() => addBullets()}
+        >
+          <MdFormatListBulleted />
+        </Button>
+
+        <Button
+          variant="none"
+          type="button"
+          className="bg-blue text-light rounded-0 btn-sm me-1"
+          onClick={() => addNumbers()}
+        >
+          <PiListNumbersBold />
+        </Button>
+
         <input
           type="color"
           className="rounded-0 bg-light btn-sm me-1 border-0 py-1"
@@ -155,7 +183,7 @@ function TextEditor({ setNote, description }) {
       <div
         id="editor"
         contentEditable="true"
-        className="border border-muted rounded-0 shadow-sm border-2"
+        className="border border-muted rounded-2 shadow-sm border-2"
         style={{
           width: "100%",
           height: "600px",

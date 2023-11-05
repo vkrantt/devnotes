@@ -16,6 +16,7 @@ const Create = () => {
   const [getNoteFromId, setGetNoteFromId] = useState();
   const [note, setNote] = useState({
     title: "",
+    tag: "",
     description: "",
     socialShare: false,
   });
@@ -35,9 +36,11 @@ const Create = () => {
         .then(function (response) {
           setGetNoteFromId(response.data.response);
           const data = response.data.response;
+
           setNote({
             ...note,
             title: data.title,
+            tag: data.tag,
             description: data.description,
             socialShare: data.socialShare,
           });
@@ -61,6 +64,13 @@ const Create = () => {
     setNote({
       ...note,
       socialShare: e.target.checked,
+    });
+  };
+
+  const handleSelectTag = (e) => {
+    setNote({
+      ...note,
+      tag: e.target.value,
     });
   };
 
@@ -129,6 +139,23 @@ const Create = () => {
               </Form.Group>
             </Row>
 
+            <Row className="mb-3 mx-0">
+              <Form.Select
+                as={Col}
+                aria-label="Default select example"
+                className="border-muted rounded-2 shadow-sm border-2"
+                onChange={handleSelectTag}
+                value={note.tag}
+              >
+                <option>Select Tag</option>
+                <option value="javascript">Javascript</option>
+                <option value="python">Python</option>
+                <option value="node">Node</option>
+                <option value="mongodb">Mongodb</option>
+                <option value="react">React</option>
+              </Form.Select>
+            </Row>
+
             <TextEditor
               setNote={setNote}
               description={getNoteFromId?.description}
@@ -145,10 +172,10 @@ const Create = () => {
 
             <Button
               variant="none"
-              className="bg-blue rounded-0 px-4 text-light mt-4"
+              className="bg-blue rounded-2 px-4 text-light mt-4"
               type="submit"
               onClick={handleSubmit}
-              disabled={!note.title}
+              disabled={!note.title || !note.tag}
             >
               {loading ? <Loader /> : getNoteFromId ? "Update" : "Share"}
             </Button>

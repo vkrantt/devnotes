@@ -20,15 +20,16 @@ async function getAllNotes(req, res) {
 
 async function createNote(req, res) {
   const userId = req.user;
-  const { title, description, socialShare } = req.body;
+  const { title, tag, description, socialShare } = req.body;
 
   try {
     const user = await User.findOne({ _id: userId });
-    const newNote = await new Note({
+    const newNote = new Note({
       userId: userId,
       title,
       description,
       socialShare,
+      tag,
       createdBy: {
         expertise: user.expertise,
         username: user.firstName + " " + user.lastName,
@@ -58,6 +59,7 @@ async function getNoteDetail(req, res) {
       _id: note._id,
       userId: note.userId,
       title: note.title,
+      tag: note.tag,
       description: note.description,
       socialShare: note.socialShare,
       createdAt: note.createdAt,
@@ -122,6 +124,7 @@ async function updateNoteById(req, res) {
     if (note) {
       const payload = {
         title: req.body.title,
+        tag: req.body.tag,
         description: req.body.description,
         socialShare: req.body.socialShare,
         updatedAt: new Date(),

@@ -48,7 +48,7 @@ const MegaMenu = () => {
 
   return (
     <Container fluid className="bg-blue sticky-top mb-3">
-      <Navbar expand="lg" variant="dark">
+      <Navbar expand="lg" variant="dark" className="p-1">
         <Container>
           <Navbar.Brand as={Link} to="/">
             <AppLogo user={user} />
@@ -56,7 +56,7 @@ const MegaMenu = () => {
           <Navbar.Toggle
             onClick={() => setShow(!show)}
             aria-controls={`offcanvasNavbar-expand-lg`}
-            className="shadow-none border-0 p-0 "
+            className="shadow-none border-0 p-0"
           />
           <Navbar.Offcanvas
             show={show}

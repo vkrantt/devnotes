@@ -45,3 +45,6 @@ img {
 body::-webkit-scrollbar {
   display: none !important;
 }
+a {
+  text-decoration: none !important;
+}

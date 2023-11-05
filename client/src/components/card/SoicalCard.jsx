@@ -25,9 +25,7 @@ const SoicalCard = ({ note, handleDelete, isDeleteLoading }) => {
           <footer className="fs-6 text-muted">
             <div className="d-flex justify-content-between align-items-center">
               <div>{note?.createdBy?.username}</div>
-              <h6 className="text-muted">
-                Updated on {formatDate(note?.updatedAt)}
-              </h6>
+              <div className="text-muted">{formatDate(note?.updatedAt)}</div>
             </div>
           </footer>
         </div>

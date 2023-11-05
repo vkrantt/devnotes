@@ -5,6 +5,9 @@ const noteSchema = new mongoose.Schema(
     title: String,
     description: String,
     socialShare: Boolean,
+    tag: {
+      type: String,
+    },
     createdBy: {
       expertise: { type: String },
       username: { type: String },
